@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+	
+	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources> <!--  this tag use to static resouces like css, images -->
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.ali" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/JSP"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="${driverClassName}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+	</bean>
+
+	<bean id="jdbcTemplate" autowire="constructor"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+	</bean>
+
+	<bean autowire="byName"
+		class="com.ali.service.impl.PatientServiceImpl">
+	</bean>
+
+	<bean id="patientdao" autowire="constructor"
+		class="com.ali.dao.impl.PatientDaoImpl">
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+			<value>classpath:db.properties</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
