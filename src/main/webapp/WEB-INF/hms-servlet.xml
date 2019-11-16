@@ -33,10 +33,14 @@
 		class="com.ali.service.impl.PatientServiceImpl">
 	</bean>
 
-	<bean id="patientdao" autowire="constructor"
+	<!-- <bean id="patientdao" autowire="constructor"
 		class="com.ali.dao.impl.PatientDaoImpl">
 	</bean>
-
+ -->
+    <bean id="patientdao"
+		class="com.ali.dao.impl.PatientDaoJPAImpl">
+	</bean>
+ 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -45,5 +49,4 @@
 			</list>
 		</property>
 	</bean>
-
 </beans>
