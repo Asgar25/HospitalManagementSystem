@@ -9,7 +9,12 @@ public class EntityManagerFactoryUtil {
 
 	public static EntityManagerFactory getEntityManagerFactory() {
 		if (emf == null)
-			emf = Persistence.createEntityManagerFactory("PatientsPersistence");
+			try {
+				emf = Persistence.createEntityManagerFactory("PatientsPersistence");	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		return emf;
 	}
 	
